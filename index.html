@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artifax - Home</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f7f7f7; /* Light Gray */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+            font-size: 100px;
+            color: rgba(0, 0, 0, 0.1);
+        }
+
+        .home-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            width: 350px;
+            text-align: center;
+        }
+
+        .artifax-title {
+            font-family: "Montserrat", sans-serif; 
+            font-weight: bold;
+            font-size: 28px; /* Header */
+            color: #6c5ce7; /* Deep Purple */
+            text-transform: uppercase; /* Capitalized text */
+        }
+
+        .welcome-message {
+            color: #333;
+            font-weight: bold;
+            font-size: 18px; /* Body */
+            margin-bottom: 20px;
+        }
+
+        .description {
+            color: #666;
+            font-size: 16px; /* Body */
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #6c5ce7; /* Deep Purple */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-transform: uppercase;
+            margin: 5px 0;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #8e44cc; /* Brighter Purple */
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="watermark">Artifax</div>
+
+    <div class="home-container">
+        <div class="artifax-title">ARTIFAX</div>
+        <div class="welcome-message">Welcome to Artifax!</div>
+        <p>Your gateway to creativity and innovation.</p>
+        <p class="description">Artifax is a hybrid platform combining an NFT marketplace and social media. Discover, buy, sell, and trade NFTs, while engaging with artists, collectors, and like-minded individuals.</p>
+        <button class="button" onclick="window.location.href='explore.html'">Explore</button>
+        <button class="button" onclick="window.location.href='signup.html'">Signup</button>
+        <button class="button" onclick="window.location.href='login.html'">Login</button>
+    </div>
+
+</body>
+</html>

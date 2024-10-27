@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artifax - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+            font-size: 100px;
+            color: rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            width: 300px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4b0082; /* Example purple */
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-message {
+            text-align: center;
+            color: #4b0082; /* Example purple */
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4b0082; /* Example purple */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #6a0dad; /* Lighter purple */
+        }
+
+        .redirect-links {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .redirect-links a {
+            color: #4b0082; /* Example purple */
+            text-decoration: none;
+        }
+
+        .artifax-title {
+            text-align: center;
+            font-family: "Arial Black", sans-serif; /* Changed to Arial Black */
+            font-weight: bold;
+            font-size: 28px;
+            color: #4b0082; /* Example purple */
+            text-transform: uppercase; /* Capitalized text */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="watermark">Fox</div>
+
+    <div class="login-container">
+        <div class="artifax-title">ARTIFAX</div>
+        <div class="welcome-message">Welcome to Artifax!</div>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username or Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div class="redirect-links">
+            <a href="signup.html">Signup</a> | 
+            <a href="forgot-password.html">Forgot Password?</a>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+
+        // Check if there's a saved username and password
+        window.onload = function() {
+            const savedUsername = localStorage.getItem('username');
+            const savedPassword = localStorage.getItem('password');
+            if (savedUsername) {
+                document.getElementById('username').value = savedUsername;
+            }
+            if (savedPassword) {
+                document.getElementById('password').value = savedPassword;
+            }
+        };
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Validate credentials
+            if (username === "ADMINS" && password === "ADMINS2") {
+                alert("Admin login successful! Redirecting to admin page...");
+                window.location.href = "admin.html"; // Redirect to admin page
+            } else if (username === "user" && password === "password") {
+                alert("User login successful! Redirecting to home page...");
+                window.location.href = "home.html"; // Redirect to user home page
+            } else {
+                alert("Login failed: Incorrect username or password.");
+            }
+
+            // Save username and password if validation succeeds
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+        });
+    </script>
+
+</body>
+</html>

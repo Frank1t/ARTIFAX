@@ -9,20 +9,22 @@
         /* Basic styling for the signup form */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: black;
+            color: white;
             margin: 0;
             padding: 20px;
         }
         .container {
-            background-color: white;
+            background-color: #333;
             padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             max-width: 400px;
             margin: auto;
         }
         h1 {
             text-align: center;
+            color: #ffffff;
         }
         label {
             display: block;
@@ -36,8 +38,13 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
+            border: 1px solid #555;
             border-radius: 4px;
+            background-color: #444;
+            color: white;
+        }
+        input[type="checkbox"] {
+            margin-right: 5px;
         }
         button {
             width: 100%;
@@ -60,6 +67,7 @@
             border: none;
             cursor: pointer;
             font-size: 18px;
+            color: white;
             margin: 0 5px;
         }
         .redirect-links {
@@ -115,6 +123,35 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
+        // Function to handle the country selection
+        function handleCountryChange() {
+            const countrySelect = document.getElementById("countrySelect");
+            const countryInput = document.getElementById("countryInput");
+
+            if (countrySelect.value) {
+                countryInput.style.display = "none"; // Hide input when dropdown has a selection
+            } else {
+                countryInput.style.display = "block"; // Show input if nothing is selected
+            }
+        }
+
+        // Example of how to populate country options (this can be expanded with a real list)
+        const countries = ['United States', 'Canada', 'United Kingdom', 'Australia', 'India', 'Germany', 'France'];
+        const countrySelect = document.getElementById("countrySelect");
+        
+        countries.forEach(country => {
+            const option = document.createElement("option");
+            option.value = country;
+            option.textContent = country;
+            countrySelect.appendChild(option);
+        });
+
+        // Handle the signup form submission
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            // Redirect to login.html
+            window.location.href = "login.html";
+        });
     </script>
 </head>
 <body>
@@ -173,48 +210,14 @@
         <!-- Social Signup Options -->
         <div class="social-signup">
             <p>Or sign up with:</p>
-            <button class="social-button google" onclick="onGoogleSignIn();"><i class="fab fa-google"></i> Google</button>
-            <button class="social-button facebook" onclick="fbLogin();"><i class="fab fa-facebook"></i> Facebook</button>
+            <button class="social-button google" onclick="onGoogleSignIn()"><i class="fab fa-google"></i> Google</button>
+            <button class="social-button facebook" onclick="fbLogin()"><i class="fab fa-facebook"></i> Facebook</button>
         </div>
 
         <!-- Redirect Link -->
         <div class="redirect-links">
-            <a href="login.html">Already have an account? Login</a>
+            <a href="login.html" style="color: white;">Already have an account? Login</a>
         </div>
     </div>
-
-    <!-- JavaScript for Fetching Country List, Form Validation, and Other Functionalities -->
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script>
-        // Function to handle the country selection
-        function handleCountryChange() {
-            const countrySelect = document.getElementById("countrySelect");
-            const countryInput = document.getElementById("countryInput");
-
-            if (countrySelect.value) {
-                countryInput.style.display = "none"; // Hide input when dropdown has a selection
-            } else {
-                countryInput.style.display = "block"; // Show input if nothing is selected
-            }
-        }
-
-        // Example of how to populate country options (this can be expanded with a real list)
-        const countries = ['United States', 'Canada', 'United Kingdom', 'Australia', 'India', 'Germany', 'France'];
-        const countrySelect = document.getElementById("countrySelect");
-        
-        countries.forEach(country => {
-            const option = document.createElement("option");
-            option.value = country;
-            option.textContent = country;
-            countrySelect.appendChild(option);
-        });
-
-        // Handle the signup form submission
-        document.getElementById("signupForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent the default form submission
-            // Redirect to login.html
-            window.location.href = "login.html";
-        });
-    </script>
 </body>
-                    </html>
+    </html>

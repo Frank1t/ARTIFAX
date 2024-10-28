@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -38,14 +38,14 @@
 
         h1 {
             text-align: center;
-            color: #4b0082; /* Example purple */
+            color: #4b0082;
             font-size: 24px;
             margin-bottom: 10px;
         }
 
         .welcome-message {
             text-align: center;
-            color: #4b0082; /* Example purple */
+            color: #4b0082;
             font-weight: bold;
             font-size: 18px;
             margin-bottom: 20px;
@@ -61,7 +61,7 @@
         }
 
         button {
-            background-color: #4b0082; /* Example purple */
+            background-color: #4b0082;
             color: white;
             padding: 10px;
             border: none;
@@ -72,7 +72,7 @@
         }
 
         button:hover {
-            background-color: #6a0dad; /* Lighter purple */
+            background-color: #6a0dad;
         }
 
         .redirect-links {
@@ -81,17 +81,38 @@
         }
 
         .redirect-links a {
-            color: #4b0082; /* Example purple */
+            color: #4b0082;
             text-decoration: none;
         }
 
         .artifax-title {
             text-align: center;
-            font-family: "Arial Black", sans-serif; /* Changed to Arial Black */
+            font-family: "Arial Black", sans-serif;
             font-weight: bold;
             font-size: 28px;
-            color: #4b0082; /* Example purple */
-            text-transform: uppercase; /* Capitalized text */
+            color: #4b0082;
+            text-transform: uppercase;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #4b0082;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -104,14 +125,30 @@
         <div class="welcome-message">Welcome to Artifax!</div>
         <form id="loginForm">
             <input type="text" id="username" placeholder="Username or Email" required>
-            <input type="password" id="password" placeholder="Password" required>
+            
+            <div class="password-container">
+                <input type="password" id="password" placeholder="Password" required>
+                <span class="toggle-password" onclick="togglePassword()">Show</span>
+            </div>
+            
+            <div class="remember-me">
+                <input type="checkbox" id="rememberMe">
+                <label for="rememberMe">Remember Me</label>
+            </div>
+            
+            <!-- Google reCAPTCHA -->
+            <div class="g-recaptcha" data-sitekey="6LeyHW4qAAAAAHOVhMjW9PSmFQK5qjMCQfX7HUpN"></div>
+            
             <button type="submit">Login</button>
         </form>
         <div class="redirect-links">
             <a href="signup.html">Signup</a> | 
-            <a href="forgot-password.html">Forgot Password?</a>
+            <a href="forgot_password.html">Forgot Password?</a>
         </div>
     </div>
+
+    <!-- Google reCAPTCHA API -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <script>
         const loginForm = document.getElementById('loginForm');
@@ -128,28 +165,52 @@
             }
         };
 
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            const toggleText = document.querySelector('.toggle-password');
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleText.innerText = "Hide";
+            } else {
+                passwordField.type = "password";
+                toggleText.innerText = "Show";
+            }
+        }
+
         loginForm.addEventListener('submit', function(event) {
             event.preventDefault();
 
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
+            // Validate reCAPTCHA
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (!recaptchaResponse) {
+                alert("Please complete the reCAPTCHA.");
+                return;
+            }
+
             // Validate credentials
             if (username === "ADMINS" && password === "ADMINS2") {
                 alert("Admin login successful! Redirecting to admin page...");
-                window.location.href = "admin.html"; // Redirect to admin page
+                window.location.href = "admin.html";
             } else if (username === "user" && password === "password") {
                 alert("User login successful! Redirecting to home page...");
-                window.location.href = "home.html"; // Redirect to user home page
+                window.location.href = "home.html";
             } else {
                 alert("Login failed: Incorrect username or password.");
             }
 
-            // Save username and password if validation succeeds
-            localStorage.setItem('username', username);
-            localStorage.setItem('password', password);
+            // Save username and password if "Remember Me" is checked
+            if (document.getElementById('rememberMe').checked) {
+                localStorage.setItem('username', username);
+                localStorage.setItem('password', password);
+            } else {
+                localStorage.removeItem('username');
+                localStorage.removeItem('password');
+            }
         });
     </script>
 
 </body>
-</html>
+    </html>

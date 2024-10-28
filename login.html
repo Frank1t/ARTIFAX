@@ -192,11 +192,11 @@
 
             // Validate credentials
             if (username === "Admin" && password === "Admin") {
-                alert("Admin login successful! Redirecting to admin page...");
-                window.location.href = "admin.html";
+                alert("Admin login successful! Redirecting to feed page...");
+                window.location.href = "feed.html"; // Redirect to feed.html
             } else if (username === "user" && password === "password") {
-                alert("User login successful! Redirecting to home page...");
-                window.location.href = "home.html";
+                alert("User login successful! Redirecting to feed page...");
+                window.location.href = "feed.html"; // Redirect to feed.html
             } else {
                 alert("Login failed: Incorrect username or password.");
             }

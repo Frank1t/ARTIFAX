@@ -24,7 +24,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px;
-            background-color: #4e0584;
+            background-color: #4e0584; /* Accent color */
             color: white;
         }
 
@@ -45,14 +45,14 @@
             flex-grow: 1;
         }
 
-        /* Bottom navigation sections arranged in a grid layout */
+        /* Bottom navigation sections in a horizontal layout */
         .bottom-sections {
-            display: flex; /* Changed to flex for horizontal layout */
-            justify-content: space-around; /* Space out items evenly */
+            display: flex; /* Flexbox for horizontal layout */
+            justify-content: space-between; /* Space items evenly */
             align-items: center; /* Center items vertically */
             background-color: #4e0584; /* Accent color */
             color: white;
-            padding: 5px 0; /* Reduced padding */
+            padding: 10px; /* Padding for the container */
             position: fixed;
             bottom: 0;
             width: 100%; /* Full width */
@@ -61,29 +61,68 @@
 
         .category-item {
             flex: 1; /* Distribute evenly */
-            padding: 5px; /* Reduced padding */
+            padding: 10px; /* Increased padding for a rectangular shape */
             cursor: pointer;
             text-align: center;
-            font-size: 12px; /* Further reduced text size */
+            font-size: 14px; /* Text size */
             transition: background-color 0.3s;
-            border: 1px solid transparent; /* For hover effect */
-            margin: 2px; /* Slight margin between items */
+            background-color: rgba(255, 255, 255, 0.1); /* Slight background color for items */
+            margin: 0 5px; /* Margin between items */
+            border-radius: 5px; /* Rounded corners for rectangular shape */
         }
 
         .category-item:hover {
-            background-color: rgba(255, 255, 255, 0.2); /* Optional hover effect */
-            border: 1px solid white; /* Border on hover */
+            background-color: rgba(255, 255, 255, 0.3); /* Optional hover effect */
+        }
+
+        /* Slide-out menu */
+        .slide-out-menu {
+            width: 50%;
+            max-width: 300px;
+            height: 100%;
+            background-color: #4e0584; /* Accent color */
+            position: fixed;
+            top: 0;
+            right: -50%;
+            z-index: 1000;
+            padding: 20px;
+            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.2);
+            color: white;
+            text-transform: uppercase;
+            transition: right 0.5s ease;
+        }
+
+        .slide-out-menu.active {
+            right: 0;
+        }
+
+        .slide-out-menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .slide-out-menu ul li {
+            padding: 15px 0;
+            border-bottom: 1px solid #666;
+        }
+
+        .slide-out-menu ul li a {
+            color: white;
+            text-decoration: none;
         }
 
         /* Responsive adjustments */
         @media (max-width: 600px) {
             .bottom-sections {
-                flex-direction: column; /* Stack on smaller screens */
+                flex-direction: row; /* Maintain horizontal layout on small screens */
             }
 
             .category-item {
-                width: 100%; /* Full width on small screens */
-                font-size: 14px; /* Slightly increase text size for better readability */
+                font-size: 12px; /* Adjust font size for smaller screens */
+            }
+
+            .slide-out-menu {
+                width: 70%; /* Adjust slide-out menu width for smaller screens */
             }
         }
     </style>
@@ -105,14 +144,25 @@
         <!-- Additional feed content here -->
     </div>
 
-    <!-- Bottom navigation sections arranged in a grid -->
+    <!-- Bottom navigation sections -->
     <div class="bottom-sections">
         <div class="category-item" onclick="navigateTo('feed')">Feed</div>
         <div class="category-item" onclick="navigateTo('nft')">NFT Marketplace</div>
         <div class="category-item" onclick="navigateTo('arts')">Arts Marketplace</div>
         <div class="category-item" onclick="navigateTo('c_assets')">C Assets</div>
         <div class="category-item" onclick="navigateTo('cc_assets')">CC Assets</div>
-        <div class="category-item" onclick="navigateTo('settings')">Settings</div>
+    </div>
+
+    <!-- Slide-out menu -->
+    <div class="slide-out-menu" id="slideOutMenu">
+        <ul>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="notifications.html">Notifications</a></li>
+            <li><a href="settings.html">Settings</a></li>
+            <li><a href="help.html">Help</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+            <li><a href="logout.html">Logout</a></li>
+        </ul>
     </div>
 
     <script>

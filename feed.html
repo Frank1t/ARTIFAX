@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARTIFAX</title>
+    <title>Feed Page</title>
     <style>
         /* Basic styling */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: white;
+            background-color: #f4f4f4;
             color: #333;
             display: flex;
             flex-direction: column;
@@ -24,7 +24,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px;
-            background-color: #4e0584; /* Accent color */
+            background-color: #4e0584;
             color: white;
         }
 
@@ -33,153 +33,129 @@
             cursor: pointer;
         }
 
-        .search-icon {
-            font-size: 18px;
-            cursor: pointer;
-        }
-
         .menu-btn {
             font-size: 18px;
             cursor: pointer;
-            margin-left: auto; /* Move the menu button to the far right */
         }
 
-        /* Main feed area */
-        .feed {
-            margin: 20px;
-            padding: 15px;
-            flex-grow: 1;
-        }
-
-        /* Bottom navigation sections in a horizontal layout */
-        .bottom-sections {
+        /* Post creation box */
+        .create-post {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #4e0584; /* Accent color */
+            flex-direction: column;
+            background: white;
+            padding: 15px;
+            margin: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .create-post textarea {
+            width: 100%;
+            height: 50px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            resize: none;
+            margin-bottom: 10px;
+        }
+
+        .create-post input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        .post-btn {
+            background-color: #4e0584;
             color: white;
             padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .category-item {
-            flex: 1;
-            padding: 10px;
-            cursor: pointer;
-            text-align: center;
-            font-size: 14px;
-            transition: background-color 0.3s;
-            background-color: rgba(255, 255, 255, 0.1);
-            margin: 0 5px;
+        .post-btn:hover {
+            background-color: #3b046d;
+        }
+
+        /* Displaying posts */
+        .feed {
+            flex-grow: 1;
+            padding: 15px;
+        }
+
+        .post {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-details {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .username {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .timestamp {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .post-content p {
+            margin: 10px 0;
+        }
+
+        .post-media {
+            width: 100%;
+            margin-top: 10px;
             border-radius: 5px;
         }
 
-        .category-item:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Slide-out menu */
-        .slide-out-menu {
-            width: 50%;
-            max-width: 300px;
-            height: 100%;
-            background-color: #4e0584;
-            position: fixed;
-            top: 0;
-            right: -100%; /* Completely hidden off the page */
-            z-index: 1000;
-            padding: 20px;
-            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.2);
-            color: white;
-            text-transform: uppercase;
-            transition: right 0.5s ease;
-        }
-
-        .slide-out-menu.active {
-            right: 0; /* Slide in when active */
-        }
-
-        .slide-out-menu ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .slide-out-menu ul li {
-            padding: 15px 0;
-            border-bottom: 1px solid #666;
-        }
-
-        .slide-out-menu ul li a {
-            color: white;
-            text-decoration: none;
-        }
-
-        /* Close button */
-        .close-btn {
-            font-size: 24px;
-            color: white;
+        .post-actions button {
+            background: none;
+            border: none;
+            color: #4e0584;
+            font-size: 14px;
             cursor: pointer;
-            margin-bottom: 20px;
-            float: right;
+            margin-right: 10px;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            .bottom-sections {
-                flex-direction: row;
-            }
-
-            .category-item {
-                font-size: 12px;
-            }
-
-            .slide-out-menu {
-                width: 70%;
-            }
+        .post-actions button:hover {
+            color: #333;
         }
     </style>
 </head>
 <body>
 
-    <!-- Top bar with avatar, search icon, and menu button -->
+    <!-- Top bar with avatar and menu button -->
     <div class="top-bar">
-        <div class="avatar" onclick="goToProfile()">👦</div>
-        <span class="search-icon" onclick="redirectToSearch()">🔍</span> <!-- Search icon -->
-        <div class="menu-btn" onclick="toggleMenu()">MENU</div> <!-- Moved menu button to the right -->
+        <div class="avatar" onclick="goToProfile()">👤</div>
+        <div class="menu-btn" onclick="toggleMenu()">MENU</div>
+    </div>
+
+    <!-- Post creation box -->
+    <div class="create-post">
+        <textarea id="postContent" placeholder="What's on your mind?"></textarea>
+        <input type="file" id="postMedia" accept="image/*,video/*">
+        <button class="post-btn" onclick="createPost()">Post</button>
     </div>
 
     <!-- Feed area -->
-    <div class="feed">
-        <div class="create-post">
-            <textarea placeholder="What's on your mind?"></textarea>
-            <button class="post-btn">Post</button>
-        </div>
-        <!-- Additional feed content here -->
-    </div>
-
-    <!-- Bottom navigation sections -->
-    <div class="bottom-sections">
-        <div class="category-item" onclick="navigateTo('feed')">Feed</div>
-        <div class="category-item" onclick="navigateTo('nft')">NFT Marketplace</div>
-        <div class="category-item" onclick="navigateTo('arts')">Arts Marketplace</div>
-        <div class="category-item" onclick="navigateTo('c_assets')">C Assets</div>
-        <div class="category-item" onclick="navigateTo('cc_assets')">CC Assets</div>
-    </div>
-
-    <!-- Slide-out menu -->
-    <div class="slide-out-menu" id="slideOutMenu">
-        <span class="close-btn" onclick="toggleMenu()">✖</span> <!-- Close button -->
-        <ul>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="notifications.html">Notifications</a></li>
-            <li><a href="settings.html">Settings</a></li>
-            <li><a href="help.html">Help</a></li>
-            <li><a href="feedback.html">Feedback</a></li>
-            <li><a href="logout.html">Logout</a></li>
-        </ul>
+    <div class="feed" id="feedContainer">
+        <!-- User posts will appear here -->
     </div>
 
     <script>
@@ -188,18 +164,77 @@
         }
 
         function toggleMenu() {
-            const menu = document.getElementById("slideOutMenu");
-            menu.classList.toggle("active"); /* Toggle slide-in and slide-out */
+            // Function to toggle menu if needed
         }
 
-        function navigateTo(page) {
-            window.location.href = page + '.html';
+        function createPost() {
+            const postContent = document.getElementById("postContent").value;
+            const postMedia = document.getElementById("postMedia").files[0];
+            const feedContainer = document.getElementById("feedContainer");
+
+            if (!postContent && !postMedia) {
+                alert("Please add text or media to your post.");
+                return;
+            }
+
+            // Create the post container
+            const postDiv = document.createElement("div");
+            postDiv.className = "post";
+
+            // User details
+            const userDetailsDiv = document.createElement("div");
+            userDetailsDiv.className = "user-details";
+            userDetailsDiv.innerHTML = `
+                <img src="avatar.jpg" alt="Avatar" class="avatar">
+                <span class="username">Username</span>
+                <span class="timestamp">Just now</span>
+            `;
+            postDiv.appendChild(userDetailsDiv);
+
+            // Post content
+            const postContentDiv = document.createElement("div");
+            postContentDiv.className = "post-content";
+            postContentDiv.innerHTML = `<p>${postContent}</p>`;
+            postDiv.appendChild(postContentDiv);
+
+            // Post media if available
+            if (postMedia) {
+                const mediaElement = document.createElement(postMedia.type.startsWith("image") ? "img" : "video");
+                mediaElement.src = URL.createObjectURL(postMedia);
+                mediaElement.className = "post-media";
+                if (postMedia.type.startsWith("video")) mediaElement.controls = true;
+                postDiv.appendChild(mediaElement);
+            }
+
+            // Post actions
+            const postActionsDiv = document.createElement("div");
+            postActionsDiv.className = "post-actions";
+            postActionsDiv.innerHTML = `
+                <button onclick="likePost(this)">Like</button>
+                <button onclick="commentPost(this)">Comment</button>
+                <button onclick="sharePost(this)">Share</button>
+            `;
+            postDiv.appendChild(postActionsDiv);
+
+            // Add the post to the feed
+            feedContainer.prepend(postDiv);
+
+            // Clear the post input fields
+            document.getElementById("postContent").value = "";
+            document.getElementById("postMedia").value = "";
         }
 
-        function redirectToSearch() {
-            window.location.href = 'feed_search.html';
+        function likePost(button) {
+            button.textContent = button.textContent === "Like" ? "Liked" : "Like";
+        }
+
+        function commentPost(button) {
+            alert("Open comment section for this post.");
+        }
+
+        function sharePost(button) {
+            alert("Share post functionality.");
         }
     </script>
-
 </body>
-</html>
+    </html>

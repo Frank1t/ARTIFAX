@@ -18,13 +18,13 @@
             position: relative;
         }
 
-        /* Top bar with avatar and menu */
+        /* Top bar */
         .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px;
-            background-color: #4e0584; /* Accent color */
+            background-color: #4e0584;
             color: white;
         }
 
@@ -38,157 +38,54 @@
             cursor: pointer;
         }
 
-        /* Slide-out menu */
-        .slide-out-menu {
-            width: 50%;
-            max-width: 300px;
-            height: 100%;
-            background-color: #4e0584;
-            position: fixed;
-            top: 0;
-            right: -50%;
-            z-index: 1000;
-            padding: 20px;
-            box-shadow: -5px 0 5px rgba(0, 0, 0, 0.2);
-            color: white;
-            text-transform: uppercase;
-            transition: right 0.5s ease;
-        }
-
-        .slide-out-menu.active {
-            right: 0;
-        }
-
-        .slide-out-menu ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .slide-out-menu ul li {
-            padding: 15px 0;
-            border-bottom: 1px solid #666;
-        }
-
-        .slide-out-menu ul li a {
-            color: white;
-            text-decoration: none;
-        }
-
-        /* Post creation box */
-        .create-post {
-            margin: 20px;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-        }
-
-        .create-post textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            resize: none;
-        }
-
-        .post-btn {
-            margin-top: 10px;
-            padding: 8px 15px;
-            background-color: #4e0584;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* Feed area with Udemy-style layout */
+        /* Main feed area */
         .feed {
             margin: 20px;
             padding: 15px;
             flex-grow: 1;
         }
 
-        .post {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            background-color: #f4f4f4;
-        }
-
-        .post-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .post-content {
-            margin-top: 10px;
-            color: #333;
-        }
-
-        .post .post-actions {
-            margin-top: 10px;
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .post .post-actions button {
-            background: none;
-            border: none;
-            color: #4e0584;
-            cursor: pointer;
-        }
-
-        /* Bottom sections for navigation */
+        /* Bottom navigation sections in a grid layout */
         .bottom-sections {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 5px;
             background-color: #4e0584;
-            color: white;
-            padding: 10px 0;
+            padding: 10px;
             position: fixed;
             bottom: 0;
             width: 100%;
         }
 
         .bottom-sections div {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #4e0584;
+            color: white;
             font-weight: bold;
+            height: 80px;
             cursor: pointer;
+            text-align: center;
+            border: 2px solid white;
         }
 
         /* Responsive adjustments */
         @media (max-width: 600px) {
             .bottom-sections {
-                flex-direction: column;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Top bar with default male avatar and menu button -->
+    <!-- Top bar with avatar and menu button -->
     <div class="top-bar">
-        <div class="avatar" onclick="goToProfile()">
-            👦 <!-- Default male avatar displayed initially -->
-        </div>
+        <div class="avatar" onclick="goToProfile()">👦</div>
         <div class="menu-btn" onclick="toggleMenu()">MENU</div>
-    </div>
-
-    <!-- Slide-out menu -->
-    <div class="slide-out-menu" id="slideOutMenu">
-        <ul>
-            <li><a href="feed.html">Home</a></li>
-            <li><a href="nft.html">NFT Marketplace</a></li>
-            <li><a href="arts.html">Arts Marketplace</a></li>
-            <li><a href="c_assets.html">Currency Assets</a></li>
-            <li><a href="cc_assets.html">Cryptocurrency Assets</a></li>
-            <li><a href="settings.html">Settings</a></li>
-            <li><a href="notification.html">Notification</a></li>
-        </ul>
     </div>
 
     <!-- Feed area -->
@@ -197,39 +94,31 @@
             <textarea placeholder="What's on your mind?"></textarea>
             <button class="post-btn">Post</button>
         </div>
-        <div class="post">
-            <div class="post-header">
-                <h3>John Doe</h3>
-                <span>5 mins ago</span>
-            </div>
-            <div class="post-content">
-                This is a sample post.
-            </div>
-            <div class="post-actions">
-                <button>Like</button>
-                <button>Comment</button>
-                <button>Share</button>
-            </div>
-        </div>
+        <!-- Additional feed content here -->
     </div>
 
-    <!-- Bottom sections -->
+    <!-- Bottom navigation sections arranged in a grid -->
     <div class="bottom-sections">
-        <div>Feed</div>
-        <div>NFT Marketplace</div>
-        <div>Arts Marketplace</div>
-        <div>C Assets</div>
-        <div>CC Assets</div>
+        <div onclick="navigateTo('feed')">Feed</div>
+        <div onclick="navigateTo('nft')">NFT Marketplace</div>
+        <div onclick="navigateTo('arts')">Arts Marketplace</div>
+        <div onclick="navigateTo('c_assets')">C Assets</div>
+        <div onclick="navigateTo('cc_assets')">CC Assets</div>
+        <div onclick="navigateTo('settings')">Settings</div>
     </div>
 
     <script>
+        function goToProfile() {
+            window.location.href = 'profile.html';
+        }
+
         function toggleMenu() {
             const menu = document.getElementById("slideOutMenu");
             menu.classList.toggle("active");
         }
 
-        function goToProfile() {
-            window.location.href = 'profile.html';
+        function navigateTo(page) {
+            window.location.href = page + '.html';
         }
     </script>
 

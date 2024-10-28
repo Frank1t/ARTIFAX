@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Basic styling for the signup form - to be expanded in Step 2 */
+        .country-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .dropdown {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -36,11 +43,14 @@
             <input type="date" id="dob" placeholder="Date of Birth" required onfocus="this.select();">
             
             <!-- Country Input -->
-            <label for="country">Country</label>
-            <select id="country" required>
-                <option value="" disabled selected>Select Country</option>
-                <!-- Country options will be populated here by JavaScript -->
-            </select>
+            <label for="countrySelect">Country</label>
+            <div class="country-container">
+                <select id="countrySelect" class="dropdown" onchange="handleCountryChange()" required>
+                    <option value="" disabled selected>Select Country</option>
+                    <!-- Country options will be populated here by JavaScript -->
+                </select>
+                <input type="text" id="countryInput" placeholder="Or type your country" onfocus="this.select();" style="display: none;">
+            </div>
             
             <!-- Phone Number Input -->
             <label for="phone">Phone Number (optional)</label>
@@ -75,7 +85,37 @@
     <!-- JavaScript for Fetching Country List, Form Validation, and Other Functionalities -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
-        // Placeholder functions for various features to be expanded in Step 3
+        // Function to handle the country selection
+        function handleCountryChange() {
+            const countrySelect = document.getElementById("countrySelect");
+            const countryInput = document.getElementById("countryInput");
+
+            if (countrySelect.value) {
+                countryInput.style.display = "none"; // Hide input when dropdown has a selection
+            } else {
+                countryInput.style.display = "block"; // Show input if nothing is selected
+            }
+        }
+
+        // Example of how to populate country options (this can be expanded with a real list)
+        const countries = ['United States', 'Canada', 'United Kingdom', 'Australia', 'India', 'Germany', 'France'];
+        const countrySelect = document.getElementById("countrySelect");
+        
+        countries.forEach(country => {
+            const option = document.createElement("option");
+            option.value = country;
+            option.textContent = country;
+            countrySelect.appendChild(option);
+        });
+
+        // Handle the signup form submission
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            // Here, you can add your form validation and submission logic
+            
+            // Redirect to login.html
+            window.location.href = "login.html";
+        });
     </script>
 </body>
 </html>

@@ -33,15 +33,15 @@
             cursor: pointer;
         }
 
-        .menu-btn {
+        .search-icon {
             font-size: 18px;
             cursor: pointer;
         }
 
-        .search-icon {
-            cursor: pointer;
+        .menu-btn {
             font-size: 18px;
-            margin-left: 10px;
+            cursor: pointer;
+            margin-left: auto; /* Move the menu button to the far right */
         }
 
         /* Main feed area */
@@ -53,32 +53,32 @@
 
         /* Bottom navigation sections in a horizontal layout */
         .bottom-sections {
-            display: flex; /* Flexbox for horizontal layout */
-            justify-content: space-between; /* Space items evenly */
-            align-items: center; /* Center items vertically */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             background-color: #4e0584; /* Accent color */
             color: white;
-            padding: 10px; /* Padding for the container */
+            padding: 10px;
             position: fixed;
             bottom: 0;
-            width: 100%; /* Full width */
+            width: 100%;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .category-item {
-            flex: 1; /* Distribute evenly */
-            padding: 10px; /* Increased padding for a rectangular shape */
+            flex: 1;
+            padding: 10px;
             cursor: pointer;
             text-align: center;
-            font-size: 14px; /* Text size */
+            font-size: 14px;
             transition: background-color 0.3s;
-            background-color: rgba(255, 255, 255, 0.1); /* Slight background color for items */
-            margin: 0 5px; /* Margin between items */
-            border-radius: 5px; /* Rounded corners for rectangular shape */
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 0 5px;
+            border-radius: 5px;
         }
 
         .category-item:hover {
-            background-color: rgba(255, 255, 255, 0.3); /* Optional hover effect */
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
         /* Slide-out menu */
@@ -86,10 +86,10 @@
             width: 50%;
             max-width: 300px;
             height: 100%;
-            background-color: #4e0584; /* Accent color */
+            background-color: #4e0584;
             position: fixed;
             top: 0;
-            right: -50%;
+            right: -100%; /* Completely hidden off the page */
             z-index: 1000;
             padding: 20px;
             box-shadow: -5px 0 5px rgba(0, 0, 0, 0.2);
@@ -99,7 +99,7 @@
         }
 
         .slide-out-menu.active {
-            right: 0;
+            right: 0; /* Slide in when active */
         }
 
         .slide-out-menu ul {
@@ -122,33 +122,33 @@
             font-size: 24px;
             color: white;
             cursor: pointer;
-            margin-bottom: 20px; /* Space from the top */
-            float: right; /* Align to the right */
+            margin-bottom: 20px;
+            float: right;
         }
 
         /* Responsive adjustments */
         @media (max-width: 600px) {
             .bottom-sections {
-                flex-direction: row; /* Maintain horizontal layout on small screens */
+                flex-direction: row;
             }
 
             .category-item {
-                font-size: 12px; /* Adjust font size for smaller screens */
+                font-size: 12px;
             }
 
             .slide-out-menu {
-                width: 70%; /* Adjust slide-out menu width for smaller screens */
+                width: 70%;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Top bar with avatar, menu button, and search icon -->
+    <!-- Top bar with avatar, search icon, and menu button -->
     <div class="top-bar">
         <div class="avatar" onclick="goToProfile()">👦</div>
-        <div class="menu-btn" onclick="toggleMenu()">MENU</div>
         <span class="search-icon" onclick="redirectToSearch()">🔍</span> <!-- Search icon -->
+        <div class="menu-btn" onclick="toggleMenu()">MENU</div> <!-- Moved menu button to the right -->
     </div>
 
     <!-- Feed area -->
@@ -175,7 +175,7 @@
         <ul>
             <li><a href="profile.html">Profile</a></li>
             <li><a href="notifications.html">Notifications</a></li>
-            <li><a href="settings.html">Settings</a></li> <!-- Restored settings link -->
+            <li><a href="settings.html">Settings</a></li>
             <li><a href="help.html">Help</a></li>
             <li><a href="feedback.html">Feedback</a></li>
             <li><a href="logout.html">Logout</a></li>
@@ -189,7 +189,7 @@
 
         function toggleMenu() {
             const menu = document.getElementById("slideOutMenu");
-            menu.classList.toggle("active");
+            menu.classList.toggle("active"); /* Toggle slide-in and slide-out */
         }
 
         function navigateTo(page) {
@@ -197,7 +197,7 @@
         }
 
         function redirectToSearch() {
-            window.location.href = 'feed_search.html'; // Redirect to search page
+            window.location.href = 'feed_search.html';
         }
     </script>
 

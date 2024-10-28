@@ -45,37 +45,45 @@
             flex-grow: 1;
         }
 
-        /* Bottom navigation sections in a grid layout */
+        /* Bottom navigation sections arranged in a grid layout */
         .bottom-sections {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 5px;
-            background-color: #4e0584;
-            padding: 10px;
+            display: flex; /* Changed to flex for horizontal layout */
+            justify-content: space-around; /* Space out items evenly */
+            align-items: center; /* Center items vertically */
+            background-color: #4e0584; /* Accent color */
+            color: white;
+            padding: 5px 0; /* Reduced padding */
             position: fixed;
             bottom: 0;
-            width: 100%;
+            width: 100%; /* Full width */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .bottom-sections div {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #4e0584;
-            color: white;
-            font-weight: bold;
-            height: 80px;
+        .category-item {
+            flex: 1; /* Distribute evenly */
+            padding: 5px; /* Reduced padding */
             cursor: pointer;
             text-align: center;
-            border: 2px solid white;
+            font-size: 12px; /* Further reduced text size */
+            transition: background-color 0.3s;
+            border: 1px solid transparent; /* For hover effect */
+            margin: 2px; /* Slight margin between items */
+        }
+
+        .category-item:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Optional hover effect */
+            border: 1px solid white; /* Border on hover */
         }
 
         /* Responsive adjustments */
         @media (max-width: 600px) {
             .bottom-sections {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(3, 1fr);
+                flex-direction: column; /* Stack on smaller screens */
+            }
+
+            .category-item {
+                width: 100%; /* Full width on small screens */
+                font-size: 14px; /* Slightly increase text size for better readability */
             }
         }
     </style>
@@ -99,12 +107,12 @@
 
     <!-- Bottom navigation sections arranged in a grid -->
     <div class="bottom-sections">
-        <div onclick="navigateTo('feed')">Feed</div>
-        <div onclick="navigateTo('nft')">NFT Marketplace</div>
-        <div onclick="navigateTo('arts')">Arts Marketplace</div>
-        <div onclick="navigateTo('c_assets')">C Assets</div>
-        <div onclick="navigateTo('cc_assets')">CC Assets</div>
-        <div onclick="navigateTo('settings')">Settings</div>
+        <div class="category-item" onclick="navigateTo('feed')">Feed</div>
+        <div class="category-item" onclick="navigateTo('nft')">NFT Marketplace</div>
+        <div class="category-item" onclick="navigateTo('arts')">Arts Marketplace</div>
+        <div class="category-item" onclick="navigateTo('c_assets')">C Assets</div>
+        <div class="category-item" onclick="navigateTo('cc_assets')">CC Assets</div>
+        <div class="category-item" onclick="navigateTo('settings')">Settings</div>
     </div>
 
     <script>

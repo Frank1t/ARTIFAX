@@ -15,6 +15,55 @@
             margin-bottom: 10px;
         }
     </style>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        // Google Sign-In function
+        function onGoogleSignIn() {
+            const googleUser = gapi.auth2.getAuthInstance().signIn().then((user) => {
+                const profile = user.getBasicProfile();
+                const email = profile.getEmail();
+                document.getElementById('signupEmail').value = email; // Populate email field
+                // Redirect to login.html
+                window.location.href = "login.html";
+            }).catch((error) => {
+                console.error('Error signing in with Google:', error);
+            });
+        }
+
+        // Facebook Sign-In function
+        function fbLogin() {
+            FB.login(function(response) {
+                if (response.authResponse) {
+                    // User is logged in and authenticated
+                    FB.api('/me', {fields: 'name,email'}, function(response) {
+                        document.getElementById('signupEmail').value = response.email; // Populate email field
+                        // Redirect to login.html
+                        window.location.href = "login.html";
+                    });
+                } else {
+                    console.log('User cancelled login or did not fully authorize.');
+                }
+            }, {scope: 'email'});
+        }
+
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : 'YOUR_FACEBOOK_APP_ID', // Replace with your Facebook App ID
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v12.0'
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+    </script>
 </head>
 <body>
     <div class="container">
@@ -72,8 +121,8 @@
         <!-- Social Signup Options -->
         <div class="social-signup">
             <p>Or sign up with:</p>
-            <button class="social-button google"><i class="fab fa-google"></i> Google</button>
-            <button class="social-button facebook"><i class="fab fa-facebook"></i> Facebook</button>
+            <button class="social-button google" onclick="onGoogleSignIn();"><i class="fab fa-google"></i> Google</button>
+            <button class="social-button facebook" onclick="fbLogin();"><i class="fab fa-facebook"></i> Facebook</button>
         </div>
 
         <!-- Redirect Link -->
@@ -111,11 +160,9 @@
         // Handle the signup form submission
         document.getElementById("signupForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent the default form submission
-            // Here, you can add your form validation and submission logic
-            
             // Redirect to login.html
             window.location.href = "login.html";
         });
     </script>
 </body>
-</html>
+    </html>
